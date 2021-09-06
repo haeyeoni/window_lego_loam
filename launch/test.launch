@@ -1,0 +1,5 @@
+<?xml version="1.0"?>
+<launch>
+  <node pkg="publish_velodyne" type="publish_velodyne_node" name="publish_velodyne" output="screen"/>
+  
+</launch>
