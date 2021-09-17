@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<launch>
+  <!-- <node pkg="publish_velodyne" type="publish_velodyne_node" name="publish_velodyne" output="screen"/> -->
+    <node pkg="octomap_server" type="octomap_server_node" name="octomap_server">
+                <param name="resolution" value="0.5" />
+                <!-- fixed map frame (set to 'map' if SLAM or localization running) -->
+                <param name="frame_id" type="string" value="/map" />
+
+                <!-- maximum range to integrate (speedup!) -->
+                <param name="sensor_model/max_range" value="80.0" />
+                <param name="sensor_model/hit" value="0.9" />
+                
+                <!-- <param name="pointcloud_min_z " value="0.0" />
+                <param name="pointcloud_max_z " value="0.5" /> -->
+                <param name="base_frame_id" type="string" value="/base_link"/>
+                <param name="ground_filter/plane_distance " value="1.0"/>
+
+                <!-- data source to integrate (PointCloud2) -->
+                <remap from="/cloud_in" to="/segmented_cloud_pure" />
+                <remap from="tf_static" to="/tf" />
+    </node>  
+    <node pkg="tf" type="static_transform_publisher" name="map_to_odom"  args="0 0 0 0 0 0 /map /odom 100" />
+    <node pkg="tf" type="static_transform_publisher" name="base_to_velo" args="0 0 0 0 0 0 /base_link /velodyne 100" />
+
+</launch>

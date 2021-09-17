@@ -23,7 +23,7 @@
 
 // Point Type
 
-typedef pcl::PointXYZ PointType;
+typedef pcl::PointXYZI PointType;
 using std::cout; using std::endl;
 using std::chrono::duration_cast;
 using std::chrono::milliseconds;
@@ -93,8 +93,8 @@ int main( int argc, char *argv[] )
 
     // ROS
     ros::NodeHandle nh;
-    ros::Publisher pub = nh.advertise<pcl::PointCloud<pcl::PointXYZ>> ("velodyne_points", 1000);
-    pcl::PointCloud<pcl::PointXYZ>::Ptr msg (new pcl::PointCloud<pcl::PointXYZ>);
+    ros::Publisher pub = nh.advertise<pcl::PointCloud<PointType>> ("velodyne_points", 1000);
+    pcl::PointCloud<PointType>::Ptr msg (new pcl::PointCloud<PointType>);
 
     while (nh.ok())
     {

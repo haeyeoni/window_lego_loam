@@ -14,15 +14,16 @@ set(Boost_DEBUG ON)
 # (This setting is able to enable by using CMake 3.6.0 RC1 or later.)
 set_property( DIRECTORY PROPERTY VS_STARTUP_PROJECT "project" )
 
-# Find Packages
-set(PCL_ROOT "C:/Program\ Files/PCL\ 1.12.0")
-set(PCL_INCLUDE_DIRS "C:/Program\ Files/PCL\ 1.12.0/include")
-set(PCL_LIBRARIES "C:/Program\ Files/PCL\ 1.12.0/lib")
 
-find_package( PCL REQUIRED)
+# Find Packages
+set(PCL_ROOT "C:/Program\ Files/PCL\ 1.8.1")
+set(PCL_INCLUDE_DIRS "C:/Program\ Files/PCL\ 1.8.1/include")
+set(PCL_LIBRARIES "C:/Program\ Files/PCL\ 1.8.1/lib")
+
+find_package( PCL REQUIRED QUIET)
 #find_package(VTK REQUIRED COMPONENTS vtkCommonCore vtkCommonDataModel)
 
-FIND_PACKAGE(Boost)
+FIND_PACKAGE(Boost QUIET)
 
 IF (Boost_FOUND)
     INCLUDE_DIRECTORIES(${Boost_INCLUDE_DIR})
@@ -41,7 +42,7 @@ catkin_package(
 #  INCLUDE_DIRS include
  LIBRARIES publish_velodyne
  CATKIN_DEPENDS roscpp sensor_msgs pcl_conversions pcl_ros
-  DEPENDS PDL
+ DEPENDS PCL
 )
 
 include_directories(
@@ -52,7 +53,11 @@ include_directories(
     # ${EIGEN3_INCLUDE_DIR} 
 )
 add_definitions( ${PCL_DEFINITIONS} )
-link_directories( ${PCL_LIBRARY_DIRS})
+
+link_directories(
+	include
+	${PCL_LIBRARY_DIRS}
+)
 
 add_executable(${PROJECT_NAME}_node src/main.cpp)
 
