@@ -7,7 +7,7 @@
 ### 0. Download source code and build 
 ```bash
 cd src && git clone --recursive https://github.com/haeyeoni/window_lego_loam
-catkin_make
+cd .. && catkin_make
 ```
 ### 1. Publish velodyne point cloud topic
 ```bash
