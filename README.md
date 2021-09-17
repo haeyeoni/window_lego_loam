@@ -20,6 +20,6 @@ roslaunch lego_loam run.launch
 ```
 
 ### Result
-![result](result.png)  
+![result](result.PNG)  
 
 
