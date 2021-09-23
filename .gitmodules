@@ -1,3 +1,3 @@
-[submodule "LeGO-LOAM"]
-	path = LeGO-LOAM
-	url = https://github.com/haeyeoni/LeGO-LOAM
+[submodule "global-LeGO-LOAM"]
+	path = global-LeGO-LOAM
+	url = https://github.com/haeyeoni/global-LeGO-LOAM
