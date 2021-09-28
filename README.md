@@ -26,5 +26,4 @@ roslaunch lego_loam run_mapping_nodelet.launch
 roslaunch lego_loam run_mapping_nodele.launch
 ```
 
-
-
+Detailed inforamtion is documented in [global-LeGO-LOAM repository](https://github.com/haeyeoni/global-LeGO-LOAM)
