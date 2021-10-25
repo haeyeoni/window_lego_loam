@@ -39,9 +39,8 @@ REQUIRED COMPONENTS
 )
 
 catkin_package(
-#  INCLUDE_DIRS include
- LIBRARIES publish_velodyne
- CATKIN_DEPENDS roscpp sensor_msgs pcl_conversions pcl_ros
+ LIBRARIES ${PROJECT_NAME}
+ CATKIN_DEPENDS roscpp sensor_msgs pcl_conversions pcl_ros nodelet
  DEPENDS PCL
 )
 
@@ -50,7 +49,6 @@ include_directories(
     ${catkin_INCLUDE_DIRS}
 
     ${Boost_INCLUDE_DIRS}
-    # ${EIGEN3_INCLUDE_DIR} 
 )
 add_definitions( ${PCL_DEFINITIONS} )
 
@@ -59,12 +57,14 @@ link_directories(
 	${PCL_LIBRARY_DIRS}
 )
 
-add_executable(${PROJECT_NAME}_node src/main.cpp)
+add_library(${PROJECT_NAME} src/main.cpp)
 
-target_link_libraries(${PROJECT_NAME}_node
+target_link_libraries(${PROJECT_NAME}
   ${PCL_LIBRARIES}
   ${catkin_LIBRARIES}
   ${Boost_LIBRARIES}
-  # ${Eigen3_LIBRARIES}
 )
 
+if(catkin_EXPORTED_LIBRARIES)
+  add_dependencies(${PROJECT_NAME} ${catkin_EXPORTED_LIBRARIES})
+endif()

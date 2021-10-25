@@ -1,0 +1,8 @@
+<library path="lib/libpublish_velodyne">
+	<class name="publish_velodyne/PublishVelodyne" type="publish_velodyne::PublishVelodyne"
+		base_class_type="nodelet::Nodelet">
+		<description>
+			publish velodyne nodelet
+		</description>
+	</class>
+</library>
