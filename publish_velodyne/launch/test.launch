@@ -1,5 +1,10 @@
-<?xml version="1.0"?>
 <launch>
-  <node pkg="publish_velodyne" type="publish_velodyne_node" name="publish_velodyne" output="screen"/>
-  
+
+<node pkg="nodelet" type="nodelet" args="manager"  name="velodyne_nodelet_manager" output="screen" />
+<node pkg="nodelet" type="nodelet" args="load publish_velodyne/PublishVelodyne velodyne_nodelet_manager"
+    name="PublishVelodyne_loader" output="screen">
+    <param name="ipadress" value="192.168.1.201"/>
+    <param name="port" value="2369"/>
+</node>
+    
 </launch>

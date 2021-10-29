@@ -57,14 +57,16 @@ public:
     PublishVelodyne() = default;
     virtual void onInit()
     {
-   
+        ros::NodeHandle nh = getNodeHandle();
+		ros::NodeHandle nhp = getPrivateNodeHandle();
+
         ROS_INFO("\033[1;32m---->\033[0m Publish Velodyne Started.");
         msg.reset(new pcl::PointCloud<PointType>());
         pub = nh.advertise<pcl::PointCloud<PointType>> ("velodyne_points", 10, this);
         boost::function<void(const pcl::PointCloud<PointType>::ConstPtr&)> cb = boost::bind(&PublishVelodyne::vlpCallback, this, _1);
    
-        ipaddress = "192.168.1.201";
-        port = "2369";
+        nhp.param<std::string>("ipaddress", ipaddress, "192.168.1.201");
+        nhp.param<std::string>("port", port, "2369");
 
         grabber = boost::shared_ptr<pcl::VLPGrabber>(new pcl::VLPGrabber(boost::asio::ip::address::from_string(ipaddress), boost::lexical_cast<unsigned short>(port)));
    
@@ -73,7 +75,7 @@ public:
 
         // Start Grabber
         grabber->start();
-        timer = nh.createTimer(ros::Duration(0.005), boost::bind(&PublishVelodyne::publishTopic, this, _1));
+        timer = nh.createTimer(ros::Duration(0.1), boost::bind(&PublishVelodyne::publishTopic, this, _1));
     }
 
     //Callback
